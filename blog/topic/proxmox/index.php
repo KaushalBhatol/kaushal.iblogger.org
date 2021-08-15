@@ -7,5 +7,5 @@ include $root . 'head.php';
     <?php include 'include.html';?>
 </div>
 <?php
-include $root . 'footer.php';
+include $footer;
 ?>

@@ -6,7 +6,6 @@ $title = "Topic";
 $seo_title = "";
 $seo_description = "";
 $seo_keywords = '';
-$slug = 'blog/topic/';
 
 include $root . 'head.php';
 ?>
@@ -22,5 +21,5 @@ include $cat_topic . 'proxmox/card.php';
  </div>
 
 <?php
-include $root . 'footer.php';
+include $footer;
 ?>

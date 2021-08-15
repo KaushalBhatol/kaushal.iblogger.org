@@ -7,7 +7,6 @@ $title = "About";
 $seo_title = "";
 $seo_description = "";
 $seo_keywords = '';
-$slug = 'about/';
 
 include $root . 'head.php';
 ?>
@@ -30,4 +29,4 @@ include $root . 'head.php';
 </div>
 
 <?php
-include $root . 'footer.php';
+include $footer;

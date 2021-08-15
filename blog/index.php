@@ -7,7 +7,6 @@ $title = "Blog";
 $seo_title = "About page on kaushal bhatol's blog.";
 $seo_description = "lets get some advantage of bing localitaton and top deals";
 $seo_keywords = 'blog, about, Kaushal Bhatol';
-$slug = 'blog/';
 
 include $root . 'head.php';
 ?>
@@ -17,12 +16,12 @@ include $root . 'head.php';
   <div class="row mb-2 container-fluid">
 
 <?php
-include $cat_linux . 'proxmox/card.php';
+include $cat_topic . 'proxmox/card.php';
 include $cat_linux . 'virtual_box/card.php';
 ?>
 </div> 
  </div>
 
 <?php
-include $root . 'footer.php';
+include $footer;
 ?>

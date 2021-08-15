@@ -1,20 +1,31 @@
 <?php
-// Site information
-$site_name = "Kaushal Bhatol"; // website name.
-$author = "Kaushal Bhatol"; // Author for meta and pages.
-$page_title = $title . ' | ' . $site_name;  // page title
-$favicon = $root . "assets/img/profile.png"; // websit logo
-$url = 'http://kaushal.iblogger.org/' . $slug ; // for seo meta
 
-// extansions
-$ext_highlight = $root . 'assets/ext/highlight.php';
+// shortcuts
+$css                = $root . 'assets/css/';
+$extantion          = $root . 'assets/extantion/';
+$img                = $root . 'assets/img/';
+$php                = $root . 'assets/php/';
+$blog               = $root . 'blog/';
+$footer             = $php  . 'footer.php';
 
 // category
-$cat_linux = $root . 'blog/linux/';
-$cat_topic = $root . 'blog/topic/';
+$cat_linux          = $blog . 'linux/';
+$cat_topic          = $blog . 'topic/';
 
-// footer
-$year = date("Y"); 
+// extansions
+$ext_highlight      = $extantion . 'highlight.php';
+
+// footer assignments
+$year               = date("Y"); 
+
+// Site information
+$site_name          = "Kaushal Bhatol"; // website name.
+$author             = "Kaushal Bhatol"; // Author for meta and pages.
+$page_title         = $title . ' | ' . $site_name;  // page title
+$favicon            = $img . "profile.png"; // websit logo
+
+include             $php . 'functions.php';
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -60,7 +71,7 @@ $year = date("Y");
               <a class="nav-link <?=$link_nav_about?>" href="<?=$root?>about/">About</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link <?=$link_nav_blog?>" href="<?=$root?>blog/">Blog</a>
+              <a class="nav-link <?=$link_nav_blog?>" href="<?=$blog?>">Blog</a>
             </li>
             <div class="dropdown nav-item">
               <a href="#" class="nav-link d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">

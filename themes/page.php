@@ -1,19 +1,14 @@
 <?php
-$root = '';
-// $link_nav_home = 'active';
-
 // basics
-$title = "";
-$seo_title = "";
-$seo_description = "";
-$seo_keywords = '';
-$slug = '';
+$title              = "";
+$seo_title          = "";
+$seo_description    = "";
+$seo_keywords       = "";
 
-include $root . 'head.php';
-?>
+// $link_nav_home      = 'active'; // nav-bar extanstion
+$root               = '';
 
-<!-- Content is hear  -->
-
-<?php
-include $root . 'footer.php';
+include             $root . 'head.php';
+include             'include.php'; // write content in this file
+include             $footer;
 ?>
