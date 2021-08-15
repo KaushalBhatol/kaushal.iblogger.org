@@ -9,6 +9,6 @@ $seo_keywords       = "";
 $root               = '';
 
 include             $root . 'main.php';
-include             'include.php'; // write content in this file
+include             'base.php'; // write content in this file
 include             $footer;
 ?>
