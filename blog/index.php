@@ -8,7 +8,7 @@ $seo_title = "About page on kaushal bhatol's blog.";
 $seo_description = "lets get some advantage of bing localitaton and top deals";
 $seo_keywords = 'blog, about, Kaushal Bhatol';
 
-include $root . 'head.php';
+include $root . 'main.php';
 ?>
 
 <div class="p-5 mb-4">

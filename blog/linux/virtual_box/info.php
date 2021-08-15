@@ -5,5 +5,5 @@ $post_date = "2021/08/10";
 $seo_title = "";
 $seo_description = "";
 $seo_keywords = '';
-$slug = 'blog/linux/virtual_box/';
+$post_link = $cat_linux . 'virtual_box/';
 ?>

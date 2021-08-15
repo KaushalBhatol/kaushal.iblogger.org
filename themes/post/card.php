@@ -1,4 +1,4 @@
 <?php
-include $cat_linux . 'proxmox/info.php';  // !! Change needed
-include $ext_highlight; // highlight extantion
+include     $cat_linux . 'proxmox' . '/info.php';  // $category . foldername. info.php
+include     $ext_highlight;
 ?>

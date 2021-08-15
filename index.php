@@ -8,7 +8,7 @@ $seo_keywords       = 'Kaushal Bhatol, blog, kaushal';
 $link_nav_home      = 'active';
 $root               = '';
 
-include             $root . 'head.php';
+include             $root . 'main.php';
 include             $root . 'home/include.php';
 include             $footer;
 ?>
