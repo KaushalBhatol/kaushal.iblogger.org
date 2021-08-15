@@ -9,6 +9,6 @@ $link_nav_home      = 'active';
 $root               = '';
 
 include             $root . 'main.php';
-include             'home/base.php';
+include             $php  . 'home.php'; // file in assets/php/ folder.
 include             $footer;
 ?>
