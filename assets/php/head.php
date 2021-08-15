@@ -17,9 +17,8 @@
   <meta name="language" content="English">
   <meta name="author" content="<?=$author?>">
 
-  <!-- Github md css file  -->
-    <link href="<?=$root?>assets/css/github-markdown.css" rel="stylesheet" >
-  <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+<!--CSS Files -->
+  <link naeme="Github MD file Style" href="<?=$css?>github-markdown.css" rel="stylesheet" >
+  <link naeme="Bootstrap css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
   </head>
   <body>
