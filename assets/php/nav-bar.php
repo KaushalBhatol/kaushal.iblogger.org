@@ -25,12 +25,12 @@
           <ul class="dropdown-menu text-small">
             <li><a class="dropdown-item" href="<?=$cat_linux?>">Linux</a></li>
             <li><a class="dropdown-item" href="<?=$cat_topic?>">Topic</a></li>
-            <li><a class="dropdown-item" href="#">Windows</a></li>
-            <li><a class="dropdown-item" href="#">Topics</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li>Ethical:</li>
-            <li><a class="dropdown-item" href="#">Osiant Tools</a></li>
-            <li><a class="dropdown-item" href="#">Kali tools</a></li>
+            <!-- <li><a class="dropdown-item" href="#">Windows</a></li> -->
+            <!-- <li><a class="dropdown-item" href="#">Topics</a></li> -->
+            <!-- <li><hr class="dropdown-divider"></li> -->
+            <!-- <li>Ethical:</li> -->
+            <!-- <li><a class="dropdown-item" href="#">Osiant Tools</a></li> -->
+            <!-- <li><a class="dropdown-item" href="#">Kali tools</a></li> -->
           </ul>
         </div>
       </ul>

@@ -1,10 +1,7 @@
-<?php /* Change and tick
-[] card.php
-[] info.php
-[] base.php
-[] blog/base.php 
-[] $category/base.php
-*/
+<?php 
+// [x] change card.php
+// [x] change info.php
+// [x] change base.php
 
 // Don't touch below
 $root               = '../../../';

@@ -1,0 +1,36 @@
+<div class="container m-5">
+<article class="markdown-body">
+    <h1 id="xampp-linux">Xampp Linux</h1>
+<h2 id="index">index</h2>
+<ul>
+<li><a href="#installation">installation</a></li><li><a href="#creating-shortcut-for-command-line">Creating Shortcut for command line</a></li><li><a href="#how-to-use">How to use</a></li><li><a href="#changing-htdocs-directory">Changing htdocs directory</a></li></ul>
+<h2 id="installation">installation</h2>
+<p>first, you need to downlod <a href="https://www.apachefriends.org/index.html">xampp for linux</a></p>
+<p>Now, make a downloded file exicutable:</p>
+<pre><code class="lang-bash"> chmod +x xampp-linux-x64-8.0.7-0-installer.run
+</code></pre>
+<p>launch the installation file as root user:</p>
+<pre><code class="lang-bash">sudo ./xampp-linux-x64-8.0.7-0-installer.run
+</code></pre>
+<h2 id="creating-shortcut-for-command-line">Creating Shortcut for command line</h2>
+<p><a href="https://askubuntu.com/a/1312385/1167010">Question answerd on askubuntu</a></p>
+<p>we using linking default xampp file to local fin</p>
+<pre><code class="lang-bash">sudo ln -s /opt/lampp/xampp /usr/local/bin
+</code></pre>
+<ul>
+<li>after applying ubove cammand you can use <code>xampp</code> insted of <code>/opt/lamp/xampp</code></li></ul>
+<h2 id="how-to-use">How to use</h2>
+<ul>
+<li>It quit simple commands after <a href="#creating-shortcut-for-command-line">created shortcut for command</a></li><li>for starting all services: <code>sudo xampp start</code></li><li>for stoping all services: <code>sudo xampp stop</code></li><li>for starting apache only: <code>sudo xampp startapache</code></li><li>for stopping apache only: <code>sudo xampp soptapache</code></li></ul>
+<h2 id="changing-htdocs-directory">Changing htdocs directory</h2>
+<p>for changing directory we also use linking method.</p>
+<ol>
+<li>move all `/opt/lampp/htdocs&#39; files to your new directory</li><li>Use below command.</li></ol>
+<pre><code class="lang-bash">sudo rm -r /opt/lampp/htdocs
+sudo ln -s ~/Documents/Learn/WEB/localhost/htdocs/ /opt/lampp/
+</code></pre>
+<ul>
+<li>it linking all htdocs files into <code>/opt/lampp/htdocs</code> file</li></ul>
+
+</article>
+</div>
