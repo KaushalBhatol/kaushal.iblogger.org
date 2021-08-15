@@ -2,8 +2,8 @@
 // basics
 $title              = "";
 $seo_title          = "";
-$seo_description    = "";
 $seo_keywords       = "";
+$seo_description    = "";
 
 // $link_nav_home      = 'active'; // nav-bar extanstion
 $root               = '';

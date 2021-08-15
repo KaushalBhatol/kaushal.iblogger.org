@@ -1,29 +1,27 @@
-# kaushal.iblogger.org | Blog
+# kaushal.iblogger.org | Blog Theme
 
->Purpose
+## Purpose
 
-* this site is created by kaushal bhatol and used for blogging and sharing informations.
+* this site is created by kaushal bhatol and used for blogging and sharing informations over the web.
 
->root
+## Q & A
 
-`$root` for base url. use for go to base url for all links.
+* __Q. Why you need this?__
+  * I'm simple guy and love's shortcuts too, Before doing this I used wordpress, But my site going slow down. And I don't want to purchace anything. So used my some of knowledge and created pure php without database site.
 
->Meta seo
+* __Q. Can I customize this for my site?__
+  * Yes, You can freely use my code for your site. I  also created [Theme](Theme/) foler were startup files are stored. It Helpls you lot.
 
-```php
-$title = "Theme";
-$seo_title = "";
-$seo_description = "";
-$seo_keywords = '';
-$slug = '';
-```
+* __Q. What skills I need for customize This?__
+  * Not much more, You just need little html and php. don't affraid with php, Me to have a small knowledge of php. just take some time with my code many things are mentioned as commet. you just need to change that.
 
-* Meta tags are used like above.
-* `title` is page title
-* `seo_title` is meta title, max length __70__.
-* `seo_description` is site descriptipn, max langth __150__.
-* `seo_keywords` are keywords for site
-  * ex: blog, linux
-* `slug` slug is link after domain.
-  * ex: about/.
-  * looks like: kaushal.iblogger.org/about
+## $root
+
+* `$root` for base url. use for go to base url for all links.
+* `$root` needed on everything so define it wisely and surely. if you forget this your page gives many errors.
+
+How to Define `$root`:
+
+* If you are in 'blog/' folder, root folder is one back away from this folder.
+* so we use `$root = '../';` for showing root directory.
+* second example: you are in 'blog/linux/' folder. you need two back so `$root = '../../'; `.
