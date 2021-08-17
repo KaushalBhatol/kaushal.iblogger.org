@@ -2,7 +2,7 @@
 
 ## Purpose
 
-* this site is created by kaushal bhatol and used for blogging and sharing informations over the web.
+* This site is created for blogging and sharing informations over the web.
 
 ## Q & A
 
@@ -14,6 +14,9 @@
 
 * __Q. What skills I need for customize This?__
   * Not much more, You just need little html and php. don't affraid with php, Me to have a small knowledge of php. just take some time with my code many things are mentioned as commet. you just need to change that.
+
+* __Q. Which platforms you used for testing this site?__
+  * I used Safari on apple iphone 6, Chrome Browser on Samsung Galaxy M51, And firefox on Ubuntu Desktop. For viewport and responce cheackup.
 
 ## $root
 
