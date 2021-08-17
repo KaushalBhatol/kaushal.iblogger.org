@@ -1,6 +1,6 @@
-  <footer class="p-1 pt-4">
+  <footer class="m-3">
     <p class="float-end"><a href="#nav">Back to top</a></p>
-    <p>Created by Kaushal Bharol &middot; &copy; <?=$year?></p>
+    <p><?=$author?> &middot; &copy; 2020 - <?=$year?></p>
   </footer>
 
 <!-- Js files  -->
