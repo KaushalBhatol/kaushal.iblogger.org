@@ -1,6 +1,6 @@
 <?php
 $title              = "Virtual Box";
-$post_link          = $cat_topic . 'virtual-box/';  // $category . folder_name
+$post_link          = $cat_linux . 'virtual-box/';  // $category . folder_name
 $post_img           = "https://img.icons8.com/ios/452/virtualbox.png";
 $post_date          = "2021/08/15"; //for post view
 $seo_title          = "Virtual Box installton and fixing usb problem on linux.";

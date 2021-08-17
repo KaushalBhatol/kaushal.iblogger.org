@@ -1,0 +1,2 @@
+ErrorDocument 404 http://kaushal.iblogger.org/
+ErrorDocument 500 http://kaushal.iblogger.org/
