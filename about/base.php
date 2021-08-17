@@ -1,5 +1,5 @@
-<div class="p-5 mb-4 rounded-3">
-    <h1 class="display-7 fw-bold">About Me</h1>
+<div class="p-3 mb-4 rounded-3">
+    <h1 class="display-7 fw-bold p-3"><i class="fas fa-id-badge"></i> <?=$title?></h1>
     <div class="container-fluid">
         <p class="fs-5">Hello guys, I'm Kaushal Bhatol from India and this page is all about my journey of coding life and what I'll do in my daily base life for improving myself. In the year 2021, I'm in Bsc IT & IMS at Ganpat University Ahemdabad as a first-year college student. my age is around 19yrs on this particular year.</p>
         <p class="fs-5">"Something is better than nothing" following this beautiful line, I just created this blog and  I have something to remember for my life journey. </p>

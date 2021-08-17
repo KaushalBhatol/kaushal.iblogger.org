@@ -26,16 +26,26 @@ $post_date          = "2021/08/10";
 $seo_description    = "";
 -----------------------------------------------
 */ ?> -->
-<div class="col-md-6">
+
+<style type="text/css">
+div#ext_highlight a{
+  text-decoration: none;
+}
+div#ext_highlight img{
+  width: 140px;
+  hight: 220px;
+}
+</style>
+<div class="col-md-6" id="ext_highlight">
   <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-    <div class="col p-4 d-flex flex-column position-static">
+    <div class="col p-3 d-flex flex-column position-static">
       <h3 class="mb-0"><?=$seo_title?></h3>
       <div class="mb-1 text-muted"><?=$post_date?></div>
       <p class="card-text mb-auto"><?=$seo_description?></p>
-      <a href="<?=$post_link?>" class="stretched-link">Continue reading</a>
+      <a href="<?=$post_link?>" class="stretched-link pt-2 text-primary">See full post&nbsp;<i class="fa fa-angle-right"></i></a>
     </div>
     <div class="col-auto d-none d-lg-block">
-      <img class="bd-placeholder-img m-2" width="180" height="200" src="<?=$post_img?>" focusable="false"></img>
+      <img class="bd-placeholder-img m-2" src="<?=$post_img?>" focusable="false"></img>
     </div>
   </div>
 </div>

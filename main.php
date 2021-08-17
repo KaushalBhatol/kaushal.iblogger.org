@@ -14,6 +14,7 @@ $cat_topic          = $blog . 'topic/';
 
 // extansions
 $ext_highlight      = $extantion . 'highlight.php';
+$ext_alert          = $extantion . 'alert.php';
 
 // footer assignments
 $year               = date("Y"); 

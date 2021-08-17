@@ -1,6 +1,6 @@
 <!-- Blog base php  -->
 <div class="mb-4">
-  <h1 class="p-4 display-7 fw-bold"><?=$title?></h1>
+  <h1 class="p-4 display-7 fw-bold"> <i class="fas fa-blog"></i> <?=$title?></h1>
   <div class="row mb-2 container-fluid">
 
 <?php
