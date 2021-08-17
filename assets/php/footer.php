@@ -1,4 +1,4 @@
-  <footer class="container">
+  <footer class="p-1 pt-4">
     <p class="float-end"><a href="#nav">Back to top</a></p>
     <p>Created by Kaushal Bharol &middot; &copy; <?=$year?></p>
   </footer>
