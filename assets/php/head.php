@@ -25,6 +25,6 @@
   <meta name="keywords" content="<?=$seo_keywords?>">
   <meta name="author" content="<?=$author?>">
 <!--CSS Files -->
-  <link name="Github MD file Style" href="<?=$css?>markdown.css" rel="stylesheet" >
+  <link name="Github MD file Style" href="http://cdn.kaushal.unaux.com/css/github.markdown.css" rel="stylesheet" >
   <link name="Bootstrap css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
 </head> <body>
