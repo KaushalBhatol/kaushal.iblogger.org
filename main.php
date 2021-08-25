@@ -23,7 +23,7 @@ $year               = date("Y");
 $site_name          = "Kaushal Bhatol";             // website name.
 $author             = "Kaushal Bhatol";             // Author for meta and pages.
 $page_title         = $title . ' | ' . $site_name;  // page title
-$favicon            = 'http://cdn.kaushal.unaux.com/img/Kaushal%20Bhatol/favicon.png';         // websit logo
+$favicon            = $img  . 'favicon.png';         // websit logo
 
 include             $php . 'functions.php';         // php functions file
 include             $php . 'head.php';              // head data, meata data
