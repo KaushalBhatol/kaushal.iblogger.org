@@ -11,6 +11,7 @@ $footer             = $php  . 'footer.php';
 // category
 $cat_linux          = $blog . 'linux/';
 $cat_topic          = $blog . 'topic/';
+$cat_bsc_ims_adp    = $blog . 'bsc_ims/ADP/';
 
 // extansions
 $ext_highlight      = $extantion . 'highlight.php';

@@ -4,6 +4,7 @@
   <div class="row mb-2 container-fluid">
 
 <?php
+include $cat_bsc_ims_adp . '20210913' . '/card.php';
 include $cat_linux . 'virtual-box' . '/card.php';
 include $cat_topic . 'proxmox' . '/card.php';
 include $cat_linux . 'ftp-host' . '/card.php';
