@@ -8,6 +8,7 @@ $seo_description    = "Want to know who I am?, and wher I work?. Every quastioin
 $link_nav_about     = 'active'; // nav-bar extanstion
 $root               = '../';
 
+include             $root . 'short.php';
 include             $root . 'main.php';
 include             'base.php';
 include             $footer;

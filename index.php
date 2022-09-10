@@ -8,6 +8,7 @@ $seo_description    = "Exploring the awesome journey of programming and cybersec
 $link_nav_home      = 'active';
 $root               = '';
 
+include             $root . 'short.php';
 include             $root . 'main.php';
 include             $php  . 'home.php'; // file in assets/php/ folder.
 include             $footer;

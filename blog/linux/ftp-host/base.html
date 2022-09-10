@@ -1,77 +1,105 @@
-<div class="container p-1 pt-3">
-    <article class="markdown-body">
-        <h1 id="ftp-server-host">ftp server host</h1>
-<ul>
-<li>Access to an FTP server can be managed in two ways<ul>
-<li><a href="#Anonymous-FTP-Configuration">Anonymous</a></li><li>Authenticated</li></ul>
-</li></ul>
-<h2 id="vsftpd-ftp-server-installation">vsftpd - FTP Server Installation</h2>
-<p>vsftpd is an FTP daemon available in Ubuntu. It is easy to install, set up, and maintain. To install vsftpd you can run the following command:</p>
-<pre><code class="lang-bash">sudo apt install vsftpd
+<article class="markdown-body">
+    <h1 id="ftp-server-host">ftp server host</h1>
+    <ul>
+        <li>Access to an FTP server can be managed in two ways<ul>
+                <li><a href="#Anonymous-FTP-Configuration">Anonymous</a></li>
+                <li>Authenticated</li>
+            </ul>
+        </li>
+    </ul>
+    <h2 id="vsftpd-ftp-server-installation">vsftpd - FTP Server Installation</h2>
+    <p>vsftpd is an FTP daemon available in Ubuntu. It is easy to install, set up, and maintain. To install vsftpd you
+        can run the following command:</p>
+    <pre><code class="lang-bash">sudo apt install vsftpd
 </code></pre>
-<h2 id="start-or-stop">start or stop</h2>
-<pre><code class="lang-bash">sudo systemctl start vsftpd.service 
+    <h2 id="start-or-stop">start or stop</h2>
+    <pre><code class="lang-bash">sudo systemctl start vsftpd.service 
 sudo systemctl stop vsftpd.service 
 sudo systemctl restart vsftpd.service
 </code></pre>
-<h2 id="anonymous-ftp-configuration">Anonymous FTP Configuration</h2>
-<p>By default vsftpd is not configured to allow anonymous download. If you wish to enable anonymous download edit <code>/etc/vsftpd.conf</code> by changing:</p>
-<pre><code class="lang-txt">anonymous_enable=YES
+    <h2 id="anonymous-ftp-configuration">Anonymous FTP Configuration</h2>
+    <p>By default vsftpd is not configured to allow anonymous download. If you wish to enable anonymous download edit
+        <code>/etc/vsftpd.conf</code> by changing:</p>
+    <pre><code class="lang-txt">anonymous_enable=YES
 </code></pre>
-<h2 id="ftp-default-location-and-directory">ftp default location and directory</h2>
-<ul>
-<li><p>During installation a ftp user is created with a home directory of <code>/srv/ftp</code>. This is the default FTP directory.</p>
-</li><li><p>If you wish to change this location, to <code>/srv/files/ftp</code> for example, simply create a directory in another location and change the ftp user’s home directory:</p>
-</li></ul>
-<pre><code class="lang-bash">sudo mkdir -p /srv/files/ftp
+    <h2 id="ftp-default-location-and-directory">ftp default location and directory</h2>
+    <ul>
+        <li>
+            <p>During installation a ftp user is created with a home directory of <code>/srv/ftp</code>. This is the
+                default FTP directory.</p>
+        </li>
+        <li>
+            <p>If you wish to change this location, to <code>/srv/files/ftp</code> for example, simply create a
+                directory in another location and change the ftp user’s home directory:</p>
+        </li>
+    </ul>
+    <pre><code class="lang-bash">sudo mkdir -p /srv/files/ftp
 sudo usermod -d /home/kaushal ftp
 </code></pre>
-<p>After making the change restart vsftpd:</p>
-<pre><code class="lang-bash">sudo systemctl restart vsftpd.service
+    <p>After making the change restart vsftpd:</p>
+    <pre><code class="lang-bash">sudo systemctl restart vsftpd.service
 </code></pre>
-<p>Finally, copy any files and directories you would like to make available through anonymous FTP to <code>/srv/files/ftp</code>, or <code>/srv/ftp</code> if you wish to use the default.</p>
-<h2 id="user-authenticated-ftp-configuration">User Authenticated FTP Configuration</h2>
-<p>By default vsftpd is configured to authenticate system users and allow them to download files. If you want users to be able to upload files, edit <code>/etc/vsftpd.conf</code>:</p>
-<pre><code class="lang-txt">write_enable=YES
+    <p>Finally, copy any files and directories you would like to make available through anonymous FTP to
+        <code>/srv/files/ftp</code>, or <code>/srv/ftp</code> if you wish to use the default.</p>
+    <h2 id="user-authenticated-ftp-configuration">User Authenticated FTP Configuration</h2>
+    <p>By default vsftpd is configured to authenticate system users and allow them to download files. If you want users
+        to be able to upload files, edit <code>/etc/vsftpd.conf</code>:</p>
+    <pre><code class="lang-txt">write_enable=YES
 </code></pre>
-<p>Now restart vsftpd:</p>
-<pre><code class="lang-txt">sudo systemctl restart vsftpd.service
+    <p>Now restart vsftpd:</p>
+    <pre><code class="lang-txt">sudo systemctl restart vsftpd.service
 </code></pre>
-<p>Now when system users login to FTP they will start in their <em>home</em> directories where they can download, upload, create directories, etc.</p>
-<p>Similarly, by default, anonymous users are not allowed to upload files to FTP server. To change this setting, you should uncomment the following line, and restart vsftpd:</p>
-<pre><code class="lang-txt">anon_upload_enable=YES
+    <p>Now when system users login to FTP they will start in their <em>home</em> directories where they can download,
+        upload, create directories, etc.</p>
+    <p>Similarly, by default, anonymous users are not allowed to upload files to FTP server. To change this setting, you
+        should uncomment the following line, and restart vsftpd:</p>
+    <pre><code class="lang-txt">anon_upload_enable=YES
 </code></pre>
-<blockquote>
-<p>Warning :
-Enabling anonymous FTP upload can be an extreme security risk. It is best to not enable anonymous upload on servers accessed directly from the Internet.</p>
-</blockquote>
-<p>The configuration file consists of many configuration parameters. The information about each parameter is available in the configuration file. Alternatively, you can refer to the man page, <strong>man 5 vsftpd.conf</strong> for details of each parameter.</p>
-<h2 id="securing-ftp">Securing FTP</h2>
-<p>There are options in <strong>/etc/vsftpd.conf</strong> to help make vsftpd more secure. For example users can be limited to their home directories by uncommenting:</p>
-<pre><code class="lang-txt">chroot_local_user=YES
+    <blockquote>
+        <p>Warning :
+            Enabling anonymous FTP upload can be an extreme security risk. It is best to not enable anonymous upload on
+            servers accessed directly from the Internet.</p>
+    </blockquote>
+    <p>The configuration file consists of many configuration parameters. The information about each parameter is
+        available in the configuration file. Alternatively, you can refer to the man page, <strong>man 5
+            vsftpd.conf</strong> for details of each parameter.</p>
+    <h2 id="securing-ftp">Securing FTP</h2>
+    <p>There are options in <strong>/etc/vsftpd.conf</strong> to help make vsftpd more secure. For example users can be
+        limited to their home directories by uncommenting:</p>
+    <pre><code class="lang-txt">chroot_local_user=YES
 </code></pre>
-<p>You can also limit a specific list of users to just their home directories:</p>
-<pre><code class="lang-txt">chroot_list_enable=YES
+    <p>You can also limit a specific list of users to just their home directories:</p>
+    <pre><code class="lang-txt">chroot_list_enable=YES
 chroot_list_file=/etc/vsftpd.chroot_list
 </code></pre>
-<p>After uncommenting the above options, create a <strong>/etc/vsftpd.chroot_list</strong> containing a list of users one per line. Then restart vsftpd:</p>
-<pre><code class="lang-txt">sudo systemctl restart vsftpd.service
+    <p>After uncommenting the above options, create a <strong>/etc/vsftpd.chroot_list</strong> containing a list of
+        users one per line. Then restart vsftpd:</p>
+    <pre><code class="lang-txt">sudo systemctl restart vsftpd.service
 </code></pre>
-<p>Also, the <strong>/etc/ftpusers</strong> file is a list of users that are disallowed FTP access. The default list includes root, daemon, nobody, etc. To disable FTP access for additional users simply add them to the list.</p>
-<p>FTP can also be encrypted using FTPS. Different from SFTP, FTPS is FTP over Secure Socket Layer (SSL). SFTP is a FTP like session over an encrypted SSH connection. A major difference is that users of SFTP need to have a shell account on the system, instead of a nologin shell. Providing all users with a shell may not be ideal for some environments, such as a shared web host. However, it is possible to restrict such accounts to only SFTP and disable shell interaction.</p>
-<p>To configure FTPS, edit <strong>/etc/vsftpd.conf</strong> and at the bottom add:</p>
-<pre><code class="lang-txt">ssl_enable=YES
+    <p>Also, the <strong>/etc/ftpusers</strong> file is a list of users that are disallowed FTP access. The default list
+        includes root, daemon, nobody, etc. To disable FTP access for additional users simply add them to the list.</p>
+    <p>FTP can also be encrypted using FTPS. Different from SFTP, FTPS is FTP over Secure Socket Layer (SSL). SFTP is a
+        FTP like session over an encrypted SSH connection. A major difference is that users of SFTP need to have a shell
+        account on the system, instead of a nologin shell. Providing all users with a shell may not be ideal for some
+        environments, such as a shared web host. However, it is possible to restrict such accounts to only SFTP and
+        disable shell interaction.</p>
+    <p>To configure FTPS, edit <strong>/etc/vsftpd.conf</strong> and at the bottom add:</p>
+    <pre><code class="lang-txt">ssl_enable=YES
 </code></pre>
-<p>Also, notice the certificate and key related options:</p>
-<pre><code class="lang-txt">rsa_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem
+    <p>Also, notice the certificate and key related options:</p>
+    <pre><code class="lang-txt">rsa_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem
 rsa_private_key_file=/etc/ssl/private/ssl-cert-snakeoil.key
 </code></pre>
-<p>By default these options are set to the certificate and key provided by the ssl-cert package. In a production environment these should be replaced with a certificate and key generated for the specific host. For more information on certificates see <a href="https://ubuntu.com/server/docs/security-certificates">Security - Certificates</a>.</p>
-<p>Now restart vsftpd, and non-anonymous users will be forced to use FTPS:</p>
-<pre><code class="lang-txt">sudo systemctl restart vsftpd.service
+    <p>By default these options are set to the certificate and key provided by the ssl-cert package. In a production
+        environment these should be replaced with a certificate and key generated for the specific host. For more
+        information on certificates see <a href="https://ubuntu.com/server/docs/security-certificates">Security -
+            Certificates</a>.</p>
+    <p>Now restart vsftpd, and non-anonymous users will be forced to use FTPS:</p>
+    <pre><code class="lang-txt">sudo systemctl restart vsftpd.service
 </code></pre>
-<p>To allow users with a shell of /usr/sbin/nologin access to FTP, but have no shell access, edit /etc/shells adding the nologin shell:</p>
-<pre><code class="lang-bash"># /etc/shells: valid login shells
+    <p>To allow users with a shell of /usr/sbin/nologin access to FTP, but have no shell access, edit /etc/shells adding
+        the nologin shell:</p>
+    <pre><code class="lang-bash"># /etc/shells: valid login shells
 /bin/csh
 /bin/sh
 /usr/bin/es
@@ -87,14 +115,16 @@ rsa_private_key_file=/etc/ssl/private/ssl-cert-snakeoil.key
 /usr/bin/screen
 /usr/sbin/nologin
 </code></pre>
-<p>This is necessary because, by default vsftpd uses PAM for authentication, and the <strong>/etc/pam.d/vsftpd</strong> configuration file contains:</p>
-<pre><code class="lang-txt">auth    required        pam_shells.so
+    <p>This is necessary because, by default vsftpd uses PAM for authentication, and the
+        <strong>/etc/pam.d/vsftpd</strong> configuration file contains:</p>
+    <pre><code class="lang-txt">auth    required        pam_shells.so
 </code></pre>
-<p>The shells PAM module restricts access to shells listed in the /etc/shells file.</p>
-<p>Most popular FTP clients can be configured to connect using FTPS. The lftp command line FTP client has the ability to use FTPS as well.</p>
-<h2 id="references">References</h2>
-<ul>
-<li>See the <a href="http://vsftpd.beasts.org/vsftpd_conf.html">vsftpd website</a> for more information.</li></ul>
+    <p>The shells PAM module restricts access to shells listed in the /etc/shells file.</p>
+    <p>Most popular FTP clients can be configured to connect using FTPS. The lftp command line FTP client has the
+        ability to use FTPS as well.</p>
+    <h2 id="references">References</h2>
+    <ul>
+        <li>See the <a href="http://vsftpd.beasts.org/vsftpd_conf.html">vsftpd website</a> for more information.</li>
+    </ul>
 
-    </article>
-</div>
+</article>

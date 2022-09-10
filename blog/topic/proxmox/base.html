@@ -1,125 +1,172 @@
-<div class="container p-1 pt-3">
-    <article class="markdown-body">
-        <h1 id="proxmox">PROXMOX</h1>
-<p>Proxmox is type one hypervisor OperatingSystem.</p>
-<p><strong>⚠ Cution</strong>: Installing proxmox will <strong>remove all your hard disk <em>data</em></strong>.</p>
-<h2 id="index">Index</h2>
-<ul>
-<li>installation<ul>
-<li><a href="#guide">Guide</a></li><li><a href="#removing-local-lvm-storage">Removing local_lvm storage</a></li><li><a href="#auto-turnoff-display">Auto-turnoff display</a></li><li><a href="#login-via-ssh-key">login via ssh key</a></li></ul>
-</li><li><a href="#proxmox-terminal-in-local-terminal-using-ssh">Proxmox terminal in local terminal &#40;Using ssh&#41;</a></li><li><a href="#vnc-client-access---remote-display">VNC Client Access - Remote Display</a><ul>
-<li><a href="#configure-vnc-access-via-monitor">Configure VNC Access via Monitor</a></li><li><a href="#configure-vnc-access-via-configuration-file">Configure VNC Access via Configuration File</a></li></ul>
-</li></ul>
-<h2 id="installation">Installation</h2>
-<h3 id="guide">Guide</h3>
-<ul>
-<li>Download Proxmox Virtual Environment from <a href="https://www.proxmox.com/en/downloads">hear</a>.</li><li>Use <a href="https://www.balena.io/etcher/">balenaEtcher</a> for creating bootable usb.</li><li>Botting through usb and installation was so easy..</li><li>NOTE: you can give any name in host name just use dot<ul>
-<li>ex : kaushal.server</li></ul>
-</li><li>NOTE: Input diffrent ip which your router not assigned to other device.<ul>
-<li>ex : 192.168.1.24</li><li>also change only last dot after numbers</li><li>Like : 00.00.00.3 to 00.00.00.24 (hear 00 showing your ip, it was any number so ignore 00.)</li></ul>
-</li><li>after installation go to another pc browser and go to ip addres which you assigned wehen istalling.. also it showen on that laptop</li><li>or use command</li></ul>
-<pre><code class="lang-bash">firefox https://192.168.1.24:8006/
+<article class="markdown-body">
+    <h1 id="proxmox">PROXMOX</h1>
+    <p>Proxmox is type one hypervisor OperatingSystem.</p>
+    <p><strong>⚠ Cution</strong>: Installing proxmox will <strong>remove all your hard disk <em>data</em></strong>.</p>
+    <h2 id="index">Index</h2>
+    <ul>
+        <li>installation<ul>
+                <li><a href="#guide">Guide</a></li>
+                <li><a href="#removing-local-lvm-storage">Removing local_lvm storage</a></li>
+                <li><a href="#auto-turnoff-display">Auto-turnoff display</a></li>
+                <li><a href="#login-via-ssh-key">login via ssh key</a></li>
+            </ul>
+        </li>
+        <li><a href="#proxmox-terminal-in-local-terminal-using-ssh">Proxmox terminal in local terminal &#40;Using
+                ssh&#41;</a></li>
+        <li><a href="#vnc-client-access---remote-display">VNC Client Access - Remote Display</a>
+            <ul>
+                <li><a href="#configure-vnc-access-via-monitor">Configure VNC Access via Monitor</a></li>
+                <li><a href="#configure-vnc-access-via-configuration-file">Configure VNC Access via Configuration
+                        File</a></li>
+            </ul>
+        </li>
+    </ul>
+    <h2 id="installation">Installation</h2>
+    <h3 id="guide">Guide</h3>
+    <ul>
+        <li>Download Proxmox Virtual Environment from <a href="https://www.proxmox.com/en/downloads">hear</a>.</li>
+        <li>Use <a href="https://www.balena.io/etcher/">balenaEtcher</a> for creating bootable usb.</li>
+        <li>Botting through usb and installation was so easy..</li>
+        <li>NOTE: you can give any name in host name just use dot<ul>
+                <li>ex : kaushal.server</li>
+            </ul>
+        </li>
+        <li>NOTE: Input diffrent ip which your router not assigned to other device.<ul>
+                <li>ex : 192.168.1.24</li>
+                <li>also change only last dot after numbers</li>
+                <li>Like : 00.00.00.3 to 00.00.00.24 (hear 00 showing your ip, it was any number so ignore 00.)</li>
+            </ul>
+        </li>
+        <li>after installation go to another pc browser and go to ip addres which you assigned wehen istalling.. also it
+            showen on that laptop</li>
+        <li>or use command</li>
+    </ul>
+    <pre><code class="lang-bash">firefox https://192.168.1.24:8006/
 </code></pre>
-<h3 id="removing-local-lvm-storage">Removing local lvm storage</h3>
-<p>For Fully remove <code>local_lvm</code> use below method:</p>
-<ol>
-<li>remove local_lvm from host &gt; storage, through browser</li><li>Open proxmox terminal and run below command</li></ol>
-<pre><code class="lang-bash">lvremove /dev/pve/data
+    <h3 id="removing-local-lvm-storage">Removing local lvm storage</h3>
+    <p>For Fully remove <code>local_lvm</code> use below method:</p>
+    <ol>
+        <li>remove local_lvm from host &gt; storage, through browser</li>
+        <li>Open proxmox terminal and run below command</li>
+    </ol>
+    <pre><code class="lang-bash">lvremove /dev/pve/data
 lvresize -l +100%FREE /dev/pve/root
 resize2fs /dev/mapper/pve-root
 </code></pre>
-<h3 id="auto-turnoff-display">Auto-turnoff display</h3>
-<pre><code class="lang-bash">nano /etc/systemd/logind.conf
+    <h3 id="auto-turnoff-display">Auto-turnoff display</h3>
+    <pre><code class="lang-bash">nano /etc/systemd/logind.conf
 </code></pre>
-<p>edit below lines and also remove <code>#</code> from edited lines</p>
-<pre><code class="lang-txt">HandleLidSwitch=ignore
+    <p>edit below lines and also remove <code>#</code> from edited lines</p>
+    <pre><code class="lang-txt">HandleLidSwitch=ignore
 HandleLidSwitchDocked=ignore
 </code></pre>
-<p>Now resrarting systemd-login :</p>
-<pre><code class="lang-bash">systemctl restart systemd-logind.service
+    <p>Now resrarting systemd-login :</p>
+    <pre><code class="lang-bash">systemctl restart systemd-logind.service
 nano /etc/default/grub
 </code></pre>
-<p>Change below lines from grub :</p>
-<pre><code class="lang-txt">GRUB_TIMEOUT=0
+    <p>Change below lines from grub :</p>
+    <pre><code class="lang-txt">GRUB_TIMEOUT=0
 GRUB_CMDLINE_LINUX=&quot;consoleblank=100&quot;
 </code></pre>
-<p>Updating grub &amp; system reboot :</p>
-<pre><code class="lang-bash">update-grub
+    <p>Updating grub &amp; system reboot :</p>
+    <pre><code class="lang-bash">update-grub
 reboot
 </code></pre>
-<h3 id="login-via-ssh-key">login via ssh key</h3>
-<ul>
-<li>for login without password you need ssh key.</li><li>this key is gerated on primery pc which is your pc <strong>not a proxmox server pc</strong>.</li></ul>
-<p><a href="https://www.ssh.com/academy/ssh/keygen">fore more details of ssh key click hear..</a></p>
-<p>Gerating ssh key:</p>
-<ul>
-<li>open terminal use below code</li></ul>
-<pre><code class="lang-bash">ssh-keygen -f ~/proxmox -t ecdsa -b 521
+    <h3 id="login-via-ssh-key">login via ssh key</h3>
+    <ul>
+        <li>for login without password you need ssh key.</li>
+        <li>this key is gerated on primery pc which is your pc <strong>not a proxmox server pc</strong>.</li>
+    </ul>
+    <p><a href="https://www.ssh.com/academy/ssh/keygen">fore more details of ssh key click hear..</a></p>
+    <p>Gerating ssh key:</p>
+    <ul>
+        <li>open terminal use below code</li>
+    </ul>
+    <pre><code class="lang-bash">ssh-keygen -f ~/proxmox -t ecdsa -b 521
 </code></pre>
-<ul>
-<li>press enter again and agian store that key on default location.</li><li>default location is <code>~/.ssh</code></li></ul>
-<p>Copying the Public Key to the Server:</p>
-<pre><code>ssh-copy-id -i ~/.ssh/proxmox.pub root@192.168.1.24
+    <ul>
+        <li>press enter again and agian store that key on default location.</li>
+        <li>default location is <code>~/.ssh</code></li>
+    </ul>
+    <p>Copying the Public Key to the Server:</p>
+    <pre><code>ssh-copy-id -i ~/.ssh/proxmox.pub root@192.168.1.24
 # enter server password
 ssh root@192.168.1.24
 rm -r ~/.ssh/id_*
-</code></pre><p>Once the public key has been configured on the server, the server will allow any connecting user that has the private key to log in. During the login process, the client proves possession of the private key by digitally signing the key exchange.</p>
-<h2 id="proxmox-terminal-in-local-terminal-using-ssh">Proxmox terminal in local terminal Using ssh</h2>
-<p>for using proxmox terminal by ssh you just need run to below command.</p>
-<pre><code class="lang-bash">ssh root@192.168.1.24
 </code></pre>
-<h2 id="vnc-client-access-remote-display">VNC Client Access - Remote Display</h2>
-<p><a href="https://pve.proxmox.com/wiki/VNC_Client_Access">For Official Proxmox VNC guidence click hear..</a></p>
-<ul>
-<li>we have two mathedos for do thet
-1) using terminal ( Perminante )
-2) using dispalay menu</li></ul>
-<h3 id="configure-vnc-access-via-monitor">Configure VNC Access via Monitor</h3>
-<ul>
-<li>Go to VM´s &#39;Monitor&#39; panel in the web interface.</li><li>You can setup a plain VNC or also a password secured one:<ul>
-<li>for the plain one type the following into the monitor:</li><li><code>change vnc 0.0.0.0:75</code></li></ul>
-</li></ul>
-<p>75 denotes the port, this will get added to the VNC base port of 5900, so in this case the VNC server listens on all addresses on port 5975.</p>
-<ul>
-<li>for the password secured one type the following into the monitor:</li></ul>
-<pre><code class="lang-bash">change vnc 0.0.0.0:75,password
+    <p>Once the public key has been configured on the server, the server will allow any connecting user that has the
+        private key to log in. During the login process, the client proves possession of the private key by digitally
+        signing the key exchange.</p>
+    <h2 id="proxmox-terminal-in-local-terminal-using-ssh">Proxmox terminal in local terminal Using ssh</h2>
+    <p>for using proxmox terminal by ssh you just need run to below command.</p>
+    <pre><code class="lang-bash">ssh root@192.168.1.24
+</code></pre>
+    <h2 id="vnc-client-access-remote-display">VNC Client Access - Remote Display</h2>
+    <p><a href="https://pve.proxmox.com/wiki/VNC_Client_Access">For Official Proxmox VNC guidence click hear..</a></p>
+    <ul>
+        <li>we have two mathedos for do thet
+            1) using terminal ( Perminante )
+            2) using dispalay menu</li>
+    </ul>
+    <h3 id="configure-vnc-access-via-monitor">Configure VNC Access via Monitor</h3>
+    <ul>
+        <li>Go to VM´s &#39;Monitor&#39; panel in the web interface.</li>
+        <li>You can setup a plain VNC or also a password secured one:<ul>
+                <li>for the plain one type the following into the monitor:</li>
+                <li><code>change vnc 0.0.0.0:75</code></li>
+            </ul>
+        </li>
+    </ul>
+    <p>75 denotes the port, this will get added to the VNC base port of 5900, so in this case the VNC server listens on
+        all addresses on port 5975.</p>
+    <ul>
+        <li>for the password secured one type the following into the monitor:</li>
+    </ul>
+    <pre><code class="lang-bash">change vnc 0.0.0.0:75,password
 set_password vnc foobar1
 expire_password vnc +30
 </code></pre>
-<p>note: the first &quot;password&quot; parameter after the IP address mustn&#39;t be replaced by a password but is the word &quot;password&quot; itself, this is just a boolean parameter telling QEMU that the server needs a password.</p>
-<h3 id="configure-vnc-access-via-configuration-file">Configure VNC Access via Configuration File</h3>
-<ul>
-<li>Add in the VM´s configuration file /etc/pve/local/qemu-server/<KVM_ID>.conf a line which specifies the VNC display number as follows (&quot;77&quot; in the example below):</li></ul>
-<pre><code class="lang-php">args: -vnc 0.0.0.0:77
+    <p>note: the first &quot;password&quot; parameter after the IP address mustn&#39;t be replaced by a password but is
+        the word &quot;password&quot; itself, this is just a boolean parameter telling QEMU that the server needs a
+        password.</p>
+    <h3 id="configure-vnc-access-via-configuration-file">Configure VNC Access via Configuration File</h3>
+    <ul>
+        <li>Add in the VM´s configuration file /etc/pve/local/qemu-server/<KVM_ID>.conf a line which specifies the VNC
+                display number as follows (&quot;77&quot; in the example below):</li>
+    </ul>
+    <pre><code class="lang-php">args: -vnc 0.0.0.0:77
 </code></pre>
-<ul>
-<li>The display number can be freely chosen, but each number must occur only once. VNC service listens then at port 5900+display_number. Note that connections via noVNC start using display number 0 consecutively therefore it´s recommended to use higher numbers in order to avoid conflicts.</li><li>Connect from VNC client to Proxmox host ip address and port as specified (5977 in the above example)</li></ul>
-<h2 id="sftp">sftp</h2>
-<p>Managing files through ftp:</p>
-<pre><code class="lang-bash">sftp://ip/root  # safe
+    <ul>
+        <li>The display number can be freely chosen, but each number must occur only once. VNC service listens then at
+            port 5900+display_number. Note that connections via noVNC start using display number 0 consecutively
+            therefore it´s recommended to use higher numbers in order to avoid conflicts.</li>
+        <li>Connect from VNC client to Proxmox host ip address and port as specified (5977 in the above example)</li>
+    </ul>
+    <h2 id="sftp">sftp</h2>
+    <p>Managing files through ftp:</p>
+    <pre><code class="lang-bash">sftp://ip/root  # safe
 sftp://ip/# full / directory
 sftp://ip/var/lib/vz/template/iso #iso directory
 </code></pre>
-<p>using one of above sftp method you can got directory.</p>
-<p>mount sftp as local folder:</p>
-<pre><code class="lang-bash">sudo apt-get install sshfs
+    <p>using one of above sftp method you can got directory.</p>
+    <p>mount sftp as local folder:</p>
+    <pre><code class="lang-bash">sudo apt-get install sshfs
 sudo sshfs -o allow_other root@192.168.1.24:/root/ /home/kaushal/Documents/Server-Storage
 </code></pre>
-<p>unomount sftp:</p>
-<pre><code class="lang-bash">sudo umount Documents/Server-Storage
+    <p>unomount sftp:</p>
+    <pre><code class="lang-bash">sudo umount Documents/Server-Storage
 </code></pre>
-<h2 id="proxmox-update">Proxmox update</h2>
-<p>For getting updates without any errors, we need to remove enrerprice repository.</p>
-<p>removing enterprice repository :</p>
-<pre><code class="lang-bash">rm -r /etc/apt/sources.list.d/pve-enterprise.list
+    <h2 id="proxmox-update">Proxmox update</h2>
+    <p>For getting updates without any errors, we need to remove enrerprice repository.</p>
+    <p>removing enterprice repository :</p>
+    <pre><code class="lang-bash">rm -r /etc/apt/sources.list.d/pve-enterprise.list
 apt update
 </code></pre>
-<h2 id="proxmox-paths-and-locations-of-files">Proxmox Paths and Locations of files</h2>
-<pre><code class="lang-bash">/var/lib/vz/dump # ISO Files
+    <h2 id="proxmox-paths-and-locations-of-files">Proxmox Paths and Locations of files</h2>
+    <pre><code class="lang-bash">/var/lib/vz/dump # ISO Files
 /var/lib/vz/template/iso # Images
 /var/lib/vz/images # Templates
 /var/lib/vz/template/cache # Cache
 </code></pre>
 
-    </article>
-</div>
+</article>

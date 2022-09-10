@@ -8,6 +8,7 @@ $seo_description    = "Find out recent posts and topics, It’s all about linux 
 $link_nav_blog      = 'active'; // nav-bar extanstion
 $root               = '../';
 
+include             $root . 'short.php';
 include             $root . 'main.php';
 include             'base.php'; // write content in this file
 include             $footer;

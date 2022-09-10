@@ -8,6 +8,8 @@
 
 // Don't touch below
 $root               = '../../../';
+
+include             $root . 'short.php';
 include             'info.php';
 include             $root . 'main.php';
 include             'base.html';
