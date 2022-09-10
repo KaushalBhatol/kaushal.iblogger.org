@@ -1,10 +1,10 @@
 <?php /* Change and tick
-[] card.php
-[] info.php
-[] base.php
-[] blog/base.php 
-[] $category/base.php
-[] sitemap.xml
+[x] card.php
+[x] info.php
+[x] base.php
+[x] blog/base.php 
+[x] $category/base.php
+[x] sitemap.xml
 */
 
 // Don't touch below

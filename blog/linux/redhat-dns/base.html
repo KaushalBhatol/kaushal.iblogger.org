@@ -1,0 +1,378 @@
+<style>
+    img[alt="redhat-dns"] {
+        width: 50%;
+        object-fit: contain;
+    }
+
+    @media only screen and (max-width: 768px) {
+        img[alt="redhat-dns"] {
+            width: 100%;
+            object-fit: contain;
+        }
+    }
+</style>
+<article class="markdown-body">
+    <h1 id="installation-of-dns">INSTALLATION OF DNS</h1>
+    <p><strong>INSTALLATION OF DNS ON RED HAT LINUX 8</strong></p>
+
+    <h2 id="-prerequisite"><strong>PREREQUISITE:</strong></h2>
+    <ul>
+        <li>The machine must be connected to the internet</li>
+        <li>The machine must be <strong>registered with the red hat.</strong></li>
+        <li>The machine must have the <strong>cockpit installed on it.</strong></li>
+        <li>Execute commands on the root user only.</li>
+    </ul>
+    <h2 id="step-1-changing-hostname">STEP 1: CHANGING HOSTNAME</h2>
+    <ul>
+        <li>For changing the hostname of Linux use the below command, also we are providing <strong>FQDN</strong> as our
+            host-name (ex. primary-dns.kaushal.local)</li>
+    </ul>
+    <pre><code class="lang-bash">hostnamectl set-hostname primary-dns.kaushal.local
+reboot
+</code></pre>
+    <p><img src="img/Untitled.png" alt="redhat-dns"></p>
+    <ul>
+        <li>After reboot check hostname has been changed or not.</li>
+    </ul>
+    <pre><code class="lang-bash">hostnamectl
+</code></pre>
+    <p><img src="img/Untitled%201.png" alt="redhat-dns"></p>
+    <h2 id="step-2-installing-dns-package">STEP 2: INSTALLING DNS PACKAGE</h2>
+    <ul>
+        <li>For installing the DNS package on red hate run the below commands</li>
+    </ul>
+    <pre><code class="lang-bash">dnf install bind bind-utils -y
+</code></pre>
+    <p><img src="img/Untitled%202.png" alt="redhat-dns"></p>
+    <ul>
+        <li>Now enable named service</li>
+    </ul>
+    <pre><code class="lang-bash">systemctl start named
+systemctl enable named
+systemctl status named
+</code></pre>
+    <p><img src="img/Untitled%203.png" alt="redhat-dns"></p>
+    <h2 id="step-3-set-static-ip-address">STEP 3: SET STATIC IP ADDRESS</h2>
+    <ul>
+        <li>Open the browser and go to <strong><a href="https://localhost:9090/">https://localhost:9090/</a></strong> or
+            <strong><a href="https://192.168.56.200:9090/">https://192.168.56.200:9090/</a></strong>
+        </li>
+        <li>login with root user.</li>
+    </ul>
+    <p><img src="img/Untitled%204.png" alt="redhat-dns"></p>
+    <ul>
+        <li>Now go to the Networking option and scroll down to the interface section.</li>
+        <li>it shows interfaces which are connected to your machine.</li>
+    </ul>
+    <p><img src="img/Untitled%205.png" alt="redhat-dns"></p>
+    <ul>
+        <li>Click on the interface in which you want to change your IP address. (ex. enp0s3 )</li>
+    </ul>
+    <p><img src="img/Untitled%206.png" alt="redhat-dns"></p>
+    <ul>
+        <li>Make sure you ticked on Connect automatically option.</li>
+        <li>Now press the edit button on the IPv4 option.</li>
+    </ul>
+    <p><img src="img/Untitled%207.png" alt="redhat-dns"></p>
+    <ul>
+        <li>Now, Disable the Automatic DNS tick. and press plus icon.</li>
+        <li>Provide the machine IP address which you want to assign static. (ex. 192.168.56.200 )</li>
+    </ul>
+    <p><img src="img/Untitled%208.png" alt="redhat-dns"></p>
+    <ul>
+        <li>Now change the Addresses section from Automatic to Manual.</li>
+        <li>assign static IP according to your network. (ex. 192.168.56.200 )</li>
+        <li>assign the netmask according to your subnet (ex. class c = 24 )</li>
+        <li>assign a getaway (your router address) (ex. 192.168.56.1 )</li>
+    </ul>
+    <p><img src="img/Untitled%209.png" alt="redhat-dns"></p>
+    <ul>
+        <li>Press Apply</li>
+        <li>Now open the terminal and restart the network manager.</li>
+    </ul>
+    <pre><code class="lang-bash">systemctl restart NetworkManager
+ifconfig
+</code></pre>
+    <p><img src="img/Untitled%2010.png" alt="redhat-dns"></p>
+    <h2 id="step-4-collecting-information-about-the-system">STEP 4: COLLECTING INFORMATION ABOUT THE SYSTEM</h2>
+    <ul>
+        <li>Collect your system information and write it down on a notepad. this helps to prevent spelling mistakes.
+        </li>
+        <li>Get IP address:</li>
+    </ul>
+    <pre><code class="lang-bash">ifconfig
+</code></pre>
+    <p><img src="img/Untitled%2011.png" alt="redhat-dns"></p>
+    <ul>
+        <li>On my machine, <strong>192.168.56.200</strong> is my static IP address from the <em>enp0s3</em> adapter.
+        </li>
+        <li>Get hostname:</li>
+    </ul>
+    <pre><code class="lang-bash">hostname
+</code></pre>
+    <p><img src="img/Untitled%2012.png" alt="redhat-dns"></p>
+    <ul>
+        <li>The gathered information was:</li>
+    </ul>
+    <table>
+        <thead>
+            <tr>
+                <th>Machine IP</th>
+                <th>192.168.56.200</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>hostname (FQDN)</td>
+                <td>primary-dns.kaushal.local</td>
+            </tr>
+            <tr>
+                <td>Network Address</td>
+                <td>192.168.56.0/24</td>
+            </tr>
+        </tbody>
+    </table>
+    <h2 id="step-5-configure-bind-dns-server">STEP 5: Configure bind DNS server</h2>
+    <ul>
+        <li>Open terminal and copy <em>named.cof</em> file to <em>named.bak</em> for backup.</li>
+        <li>Then edit <em>named.conf</em> file using any editor.</li>
+    </ul>
+    <pre><code class="lang-bash">cp /etc/named.conf  /etc/named.bak
+nano /etc/named.conf
+</code></pre>
+    <p><img src="img/Untitled%2013.png" alt="redhat-dns"></p>
+    <ul>
+        <li>Under the ‘Options’ section, ensure you comment out the lines indicated below to enable the Bind DNS server
+            to listen to all IPs.</li>
+    </ul>
+    <pre><code class="lang-bash">// listen-on port 53 { 127.0.0.1; }; 
+// listen-on-v6 port 53 { ::1; };
+</code></pre>
+    <ul>
+        <li>Additionally, locate the allow-query parameter and adjust it according to your network subnet.</li>
+    </ul>
+    <pre><code class="lang-bash">allow-query { localhost; 192.168.56.0/24; };
+</code></pre>
+    <p><img src="img/Untitled%2014.png" alt="redhat-dns"></p>
+    <ul>
+        <li>
+            <p>This setting allows only the hosts in the defined network to access the DNS server and not just any other
+                host.</p>
+        </li>
+        <li>
+            <p>To define the <strong>reverse and forward</strong> lookup zones, copy and paste the following
+                configuration at the end of /etc/named.conf</p>
+        </li>
+    </ul>
+    <pre><code class="lang-bash">//forward zone
+zone &quot;kaushal.local&quot; IN {
+     type master;
+     file &quot;kaushal.local.db&quot;;
+     allow-update { none; };
+     allow-query { any; };
+};
+
+//backward zone
+zone &quot;56.168.192.in-addr.arpa&quot; IN {
+     type master;
+     file &quot;kaushal.local.rev&quot;;
+     allow-update { none; };
+     allow-query { any; };
+};
+</code></pre>
+    <p><img src="img/Untitled%2015.png" alt="redhat-dns"></p>
+    <ul>
+        <li>Now press <code>ctrl + s</code> and <code>ctrl + x</code> for saving and exiting from the file.</li>
+        <li>Check for errors on named.conf file using below command.</li>
+    </ul>
+    <pre><code class="lang-bash">named-checkconf
+</code></pre>
+    <p><img src="img/Untitled%2016.png" alt="redhat-dns"></p>
+    <ul>
+        <li>If no error displayed on terminal, it means your named.conf file is ok.</li>
+    </ul>
+    <h2 id="step-6-create-a-forward-dns-zone-file-for-the-domain">STEP 6: Create a forward DNS zone file for the domain
+    </h2>
+    <ul>
+        <li>Create new file kaushal.local.db on <code>/var/named/</code> directory and edit it.</li>
+    </ul>
+    <pre><code class="lang-bash">nano /var/named/kaushal.local.db
+</code></pre>
+    <p><img src="img/Untitled%2017.png" alt="redhat-dns"></p>
+    <ul>
+        <li>Make changes on below text and paste it on kaushal.local.db</li>
+    </ul>
+    <pre><code class="lang-bash">$TTL 86400
+@ IN SOA primary-dns.kaushal.local. admin.kaushal.local. (
+                                                2020011800 ;Serial
+                                                3600 ;Refresh
+                                                1800 ;Retry
+                                                604800 ;Expire
+                                                86400 ;Minimum TTL
+)
+
+;Name Server Information
+@ IN NS primary-dns.kaushal.local.
+
+;IP Address for Name Server
+primary-dns IN A 192.168.56.200
+
+;A Record for the following Host name
+www  IN   A   192.168.56.200
+test  IN   A   192.168.56.201
+
+;CNAME Record
+ftp  IN   CNAME www.kaushal.local.
+</code></pre>
+    <p><img src="img/Untitled%2018.png" alt="redhat-dns"></p>
+    <ul>
+        <li>Now press <code>ctrl + s</code> and <code>ctrl + x</code> for saving and exiting from the file.</li>
+        <li>Check for errors on kaushal.local.db file using below command.</li>
+    </ul>
+    <pre><code class="lang-bash">named-checkzone kaushal.local /var/named/kaushal.local.db
+</code></pre>
+    <p><img src="img/Untitled%2019.png" alt="redhat-dns"></p>
+    <ul>
+        <li>File is OK.</li>
+    </ul>
+    <h2 id="step-7-create-a-reverse-dns-zone-file-for-the-domain">STEP 7: Create a reverse DNS zone file for the domain
+    </h2>
+    <ul>
+        <li>Create new file kaushal.local.rev on <code>/var/named/</code> directory and edit it.</li>
+    </ul>
+    <pre><code class="lang-bash">nano /var/named/kaushal.local.rev
+</code></pre>
+    <p><img src="img/Untitled%2020.png" alt="redhat-dns"></p>
+    <ul>
+        <li>Make changes on below text and paste it on kaushal.local.rev</li>
+    </ul>
+    <pre><code class="lang-bash">$TTL 86400
+@ IN SOA primary-dns.kaushal.local. admin.kaushal.local. (
+                                            2020011800 ;Serial
+                                            3600 ;Refresh
+                                            1800 ;Retry
+                                            604800 ;Expire
+                                            86400 ;Minimum TTL
+)
+;Name Server Information
+@ IN NS primary-dns.kaushal.local.
+primary-dns     IN      A       192.168.56.200
+
+;Reverse lookup for Name Server
+200 IN PTR primary-dns.kaushal.local.
+
+;PTR Record IP address to Hostname
+200     IN      PTR     www.kaushal.local
+201     IN      PTR     test.kaushal.local
+</code></pre>
+    <p><img src="img/Untitled%2021.png" alt="redhat-dns"></p>
+    <ul>
+        <li>Now press <code>ctrl + s</code> and <code>ctrl + x</code> for saving and exiting from the file.</li>
+        <li>Check for errors on kaushal.local.rev file using below command.</li>
+    </ul>
+    <pre><code class="lang-bash">named-checkzone 192.168.56.200 /var/named/kaushal.local.rev
+</code></pre>
+    <p><img src="img/Untitled%2022.png" alt="redhat-dns"></p>
+    <ul>
+        <li>File is OK.</li>
+    </ul>
+    <h2 id="step-8-assign-the-necessary-file-permissions-to-the-two-configuration-files">STEP 8: assign the necessary
+        file permissions to the two configuration files.</h2>
+    <ul>
+        <li>For assigning permissions use below commands.</li>
+    </ul>
+    <pre><code class="lang-bash">chown named:named /var/named/kaushal.local.db
+chown named:named /var/named/kaushal.local.rev
+</code></pre>
+    <p><img src="img/Untitled%2023.png" alt="redhat-dns"></p>
+    <ul>
+        <li>For the changes to be reflected in the system, restart the Bind DNS server</li>
+    </ul>
+    <pre><code class="lang-bash">systemctl restart named
+</code></pre>
+    <p><img src="img/Untitled%2024.png" alt="redhat-dns"></p>
+    <h2 id="step-9-add-firewall-rule">STEP 9: Add Firewall Rule</h2>
+    <ul>
+        <li>Use below commands to assign firewall rules.</li>
+    </ul>
+    <pre><code class="lang-bash">firewall-cmd --add-service=dns --zone=public --permanent
+firewall-cmd --reload
+</code></pre>
+    <p><img src="img/Untitled%2025.png" alt="redhat-dns"></p>
+    <h2 id="step-10-test-the-bind-dns-server-from-a-client-system">STEP 10: Test the Bind DNS server from a client
+        system</h2>
+    <ul>
+        <li>Open client machine and change dns to 192.168.56.200.</li>
+    </ul>
+    <h3 id="for-linux-client-machine">For linux client machine:</h3>
+    <ul>
+        <li>Open terminal and open resolv.conf file.</li>
+    </ul>
+    <pre><code class="lang-bash">sudo nano /etc/resov.conf
+</code></pre>
+    <p><img src="img/Untitled%2026.png" alt="redhat-dns"></p>
+    <ul>
+        <li>Add DNS IP address</li>
+    </ul>
+    <pre><code class="lang-bash">nameserver 192.168.56.200
+</code></pre>
+    <p><img src="img/Untitled%2027.png" alt="redhat-dns"></p>
+    <ul>
+        <li>Now press <code>ctrl + s</code> and <code>ctrl + x</code> for saving and exiting from the file.</li>
+    </ul>
+    <p><strong>Using the nslookup command test the Bind DNS server as shown:</strong></p>
+    <pre><code class="lang-bash">nslookup primary-dns.kaushal.local
+nslookup 192.168.56.200
+</code></pre>
+    <p><img src="img/Untitled%2028.png" alt="redhat-dns"></p>
+    <ul>
+        <li>You can also check for other address</li>
+    </ul>
+    <pre><code class="lang-bash">nslookup www.kaushal.local
+nslookup test.kaushal.local
+</code></pre>
+    <p><img src="img/Untitled%2029.png" alt="redhat-dns"></p>
+    <p>Perfect! The reverse DNS lookup is also working as we would expect. 🥳</p>
+    <h3 id="for-windows-client-machine">For Windows client machine:</h3>
+    <ul>
+        <li>Press <code>win + R</code> and run <code>ncpa.cpl</code> .</li>
+    </ul>
+    <p><img src="img/Untitled%2030.png" alt="redhat-dns"></p>
+    <ul>
+        <li>Right click on adapter and disable it.</li>
+        <li>Now again right click and select Properties option.</li>
+    </ul>
+    <p><img src="img/Untitled%2031.png" alt="redhat-dns"></p>
+    <ul>
+        <li>Disable IPv6 and go to properites of IPv4.</li>
+    </ul>
+    <p><img src="img/Untitled%2032.png" alt="redhat-dns"></p>
+    <ul>
+        <li>Select Use the following DNS server addresses.</li>
+        <li>Put DNS server IP (ex. 192.168.56.200 )</li>
+    </ul>
+    <p><img src="img/Untitled%2033.png" alt="redhat-dns"></p>
+    <ul>
+        <li>Press Ok, and close option.</li>
+        <li>Now right click on adapeter and enable it.</li>
+    </ul>
+    <p><strong>Using the nslookup command test the Bind DNS server as shown:</strong></p>
+    <pre><code class="lang-bash">nslookup primary-dns.kaushal.local
+nslookup 192.168.56.200
+</code></pre>
+    <p><img src="img/Untitled%2034.png" alt="redhat-dns"></p>
+    <ul>
+        <li>You can also check for other address</li>
+    </ul>
+    <pre><code class="lang-bash">nslookup www.kaushal.local
+nslookup test.kaushal.local
+</code></pre>
+    <p><img src="img/Untitled%2035.png" alt="redhat-dns"></p>
+    <p>Perfect! The reverse DNS lookup is also working as we would expect. 🥳</p>
+    <ul>
+        <li>Now, we can also use <strong>cockpit</strong> through domain on client systems. (ex. <a
+                href="https://www.kaushal.local:9090/">https://www.kaushal.local:9090/</a> )</li>
+    </ul>
+    <p><img src="img/Untitled%2036.png" alt="redhat-dns"></p>
+
+</article>
